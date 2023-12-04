@@ -1,2 +1,2 @@
 # FundAnalyser
-Uses yahoo price data to analyse
+Uses yahoo price data
