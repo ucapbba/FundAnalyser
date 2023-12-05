@@ -18,5 +18,7 @@ jobs:
       
     - name : Run unit tests 
       run : |
+        pytest Tests/test_BaseDataHelper.py
+        pytest Tests/test_FundAnalyser.py
         pytest Tests/test_MarketData.py
         pytest Tests/test_Misc.py
