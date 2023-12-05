@@ -35,8 +35,9 @@
     <Compile Include="MarketData\MarketDataPlotter.py" />
     <Compile Include="Executable\AnalyseAllFunds.py" />
     <Compile Include="Executable\SaveDataToFile.py" />
+    <Compile Include="Report\ReportGenerator.py" />
     <Compile Include="Tests\test_BaseDataHelper.py" />
-    <Compile Include="Tests\test_FundAnalysis.py" />
+    <Compile Include="Tests\test_FundAnalyser.py" />
     <Compile Include="Tests\test_MarketData.py" />
   </ItemGroup>
   <ItemGroup>

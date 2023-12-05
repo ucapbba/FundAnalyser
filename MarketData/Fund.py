@@ -15,10 +15,11 @@ class Fund:
         self.fullName = _fullName
         self.dataHelper = None
         
-    def SetIndicators(self, _absGrowth: double, _growthOnMean: double, _volatility: double,) -> void:
-        self.indicators["volatility"] = _volatility
+    def SetIndicators(self, _mean: double, _absGrowth: double, _growthOnMean: double, _volatility: double,) -> void:
+        self.indicators["mean"] = _mean
         self.indicators["absGrowth"] = _absGrowth
         self.indicators["growthOnMean"] = _growthOnMean
+        self.indicators["volatility"] = _volatility
             
     def setDataHelper(self, _dataHelper: MarketDataHelper) -> void:
         self.dataHelper = _dataHelper

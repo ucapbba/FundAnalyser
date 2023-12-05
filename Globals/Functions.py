@@ -37,11 +37,12 @@ def GetAllFundIndicators(fundList: FundList) -> FundList:
         if fund.dataHelper is None:
             continue
         analyser = FundAnalyser(fund)
+        mean = analyser.closeMean
         absGrowth = analyser.GetAbsGrowth()
         growthOnMean = analyser.GetGrowthOnMean()
         vol = analyser.GetVolatility()
         # analyser.AddRollingAverage()
-        fund.SetIndicators(absGrowth, growthOnMean, vol)
+        fund.SetIndicators(mean, absGrowth, growthOnMean, vol)
         print(fund.fullName + " " + str(absGrowth) + " " + str(growthOnMean) + " " + str(vol))
     return fundList
 

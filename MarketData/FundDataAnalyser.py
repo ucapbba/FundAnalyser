@@ -34,5 +34,5 @@ class FundAnalyser:
         vol = 0
         for point in points:
             vol += (point - self.closeMean)**2
-        vol = vol / self.closeData.size
+        vol = vol / self.closeData.size / self.closeMean
         return vol
