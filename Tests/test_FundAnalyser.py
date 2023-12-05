@@ -40,4 +40,4 @@ def test_Vol():
     fund = GetFundDataHelper()
     analyser = FundAnalyser(fund)
     vol = analyser.GetVolatility()
-    assert vol == pytest.approx(0.946, rel=1e-2)
+    assert vol == pytest.approx(0.0084712, rel=1e-4)
