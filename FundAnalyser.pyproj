@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>bbd55af8-c887-43cf-99ac-eab14a2c84e8</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>Executable\AnalyseSingleFund.py</StartupFile>
+    <StartupFile>Executable\AnalyseAllFunds.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -36,6 +36,7 @@
     <Compile Include="Executable\AnalyseAllFunds.py" />
     <Compile Include="Executable\SaveDataToFile.py" />
     <Compile Include="Tests\test_BaseDataHelper.py" />
+    <Compile Include="Tests\test_FundAnalysis.py" />
     <Compile Include="Tests\test_MarketData.py" />
   </ItemGroup>
   <ItemGroup>
@@ -43,6 +44,7 @@
     <Folder Include="MarketData\" />
     <Folder Include="Executable\" />
     <Folder Include="Globals\" />
+    <Folder Include="Report\" />
     <Folder Include="Tests\" />
   </ItemGroup>
   <ItemGroup>

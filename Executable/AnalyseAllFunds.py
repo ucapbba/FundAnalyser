@@ -4,4 +4,5 @@ import Globals.Variables as gv
 
 fundList = FundList()
 gf.PopulateAllFundData(gv.startDate, gv.endDate, fundList)
-gf.PlotAllFundData(fundList)
+# gf.PlotAllFundData(fundList)
+fundList = gf.GetAllFundIndicators(fundList)
