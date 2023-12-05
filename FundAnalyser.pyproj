@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>bbd55af8-c887-43cf-99ac-eab14a2c84e8</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>AnalyseYahooData.py</StartupFile>
+    <StartupFile>Executable\AnalyseSingleFund.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -22,20 +22,27 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Executable\AnalyseSingleFund.py" />
     <Compile Include="Base\BaseDataHelper.py" />
     <Compile Include="Base\BasePlotter.py" />
     <Compile Include="Base\MiscFunctions.py" />
+    <Compile Include="Globals\Functions.py" />
+    <Compile Include="Globals\Variables.py" />
+    <Compile Include="MarketData\Fund.py" />
+    <Compile Include="MarketData\FundDataAnalyser.py" />
     <Compile Include="MarketData\FundList.py" />
     <Compile Include="MarketData\MarketDataHelper.py" />
     <Compile Include="MarketData\MarketDataPlotter.py" />
-    <Compile Include="AnalyseYahooData.py" />
-    <Compile Include="quickChecks.py" />
-    <Compile Include="Selenium.py" />
+    <Compile Include="Executable\AnalyseAllFunds.py" />
+    <Compile Include="Executable\SaveDataToFile.py" />
+    <Compile Include="Tests\test_BaseDataHelper.py" />
     <Compile Include="Tests\test_MarketData.py" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Base\" />
     <Folder Include="MarketData\" />
+    <Folder Include="Executable\" />
+    <Folder Include="Globals\" />
     <Folder Include="Tests\" />
   </ItemGroup>
   <ItemGroup>

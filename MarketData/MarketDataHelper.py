@@ -8,6 +8,7 @@ import numpy as np
 
 class MarketDataHelper(BaseDataHelper):
     myArray: ndarray
+    myDataFrame: DataFrame
     myStartDate: datetime64
     myEndDate: datetime64
 
@@ -15,6 +16,11 @@ class MarketDataHelper(BaseDataHelper):
         self.myDataFrame = _myDataFrame
         self.myStartDate = Misc.toDate(_myStartDate)
         self.myEndDate = Misc.toDate(_myEndDate)
+        
+    def IsEmpty(self) -> bool:
+        if self.myDataFrame.empty:
+            return True
+        return False
 
     def HasFullDatesRange(self,) -> bool:
         dates = self.myDataFrame['Date']
