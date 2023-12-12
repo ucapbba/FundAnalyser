@@ -1,0 +1,24 @@
+name: Push Event Workflow
+
+on: push 
+
+jobs:
+  unit-testing:
+    runs-on: ubuntu-latest 
+    
+    steps:
+    - name : Checkout code
+      uses : actions/checkout@v2
+      
+    - name : Install Packages 
+      run : |
+        pip install pytest pandas numpy
+        pip install matplotlib seaborn
+        pip install yfinance
+      
+    - name : Run unit tests 
+      run : |
+        pytest Tests/test_BaseDataHelper.py
+        pytest Tests/test_FundAnalyser.py
+        pytest Tests/test_MarketData.py
+        pytest Tests/test_Misc.py
