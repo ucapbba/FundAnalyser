@@ -1,7 +1,7 @@
 import os
 from MarketData.FundList import FundList
 import xlwt
-
+import Globals.Variables as gv
 
 class FundReportGenerator:
     fundList: FundList
@@ -11,7 +11,7 @@ class FundReportGenerator:
     
     def WriteToExcel(self, filename):
         book = xlwt.Workbook()
-        
+        filename = filename+"_"+"_"+gv.startDate+"_"+gv.endDate+".xls"
         self.CreateIndicatorsSheet(book)
         self.CreateWarningsSheet(book)
         
