@@ -24,7 +24,7 @@ class MarketDataHelper(BaseDataHelper):
 
     def HasFullDatesRange(self,) -> bool:
         dates = self.myDataFrame['Date']
-        startDate = Misc.toDate(str(dates[0])) - np.timedelta64(1, 'D')
+        startDate = Misc.toDate(str(dates[0]))
         endDate = Misc.toDate(dates[dates.size - 1]) + np.timedelta64(1, 'D')
         if startDate != self.myStartDate:
             print("data start date = " + str(startDate) + " when requested was " + str(self.myStartDate))

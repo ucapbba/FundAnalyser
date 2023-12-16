@@ -18,9 +18,11 @@ def PopulateAllFundData(startDate, endDate, fundList: FundList) -> np.void:
         dataHelper = MarketDataHelper(data, startDate, endDate)
         if dataHelper.IsEmpty():
             print("Problem accessing Yahoo data for " + fundKey)
+            print("")
             continue
         dataHelper.HasFullDatesRange()
         fund.setDataHelper(dataHelper)
+        print(" ")
 
 
 def PlotAllFundData(fundList: FundList) -> np.void:
