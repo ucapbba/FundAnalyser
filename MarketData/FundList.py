@@ -21,7 +21,7 @@ class FundList:
         self.myDict["Black Natural"] = Fund("GB00B6865B79", "BlackRock Natural Resources Fund D Acc")
         self.myDict["CT Global Bond"] = Fund("GB00B8C2M701", "CT Global Bond Fund")
         self.myDict["CT Global Real"] = Fund("GB00BJ05NG47", "CT Global Real Estate Securities")
-        #self.myDict["Fidelity Emerging"] = Fund("GB00BJ05NG47", "Fidelity Index Pacific ex Japan Fund") #Missing 
+        # self.myDict["Fidelity Emerging"] = Fund("GB00BJ05NG47", "Fidelity Index Pacific ex Japan Fund") #Missing
         self.myDict["Fidelity Pacific"] = Fund("GB00BHZK8G51", "Fidelity Index Pacific ex Japan Fund")
         self.myDict["Fidelity Sustainable"] = Fund("GB00BQBG6R76", "Fidelity Sustainable Emerging Markets Equity Fund")
         self.myDict["GS Emerging"] = Fund("LU0858288516", "Goldman Sachs Emerging Markets Equity Portfolio R Inc GBP")
@@ -34,7 +34,7 @@ class FundList:
         self.myDict["HSBC World"] = Fund("GB00B7L42X66", "HSBC World Selection Cautious Portfolio")
         self.myDict["Invesco Pacific"] = Fund("GB00BJ04K596", "Invesco Pacific Fund (UK) Y (Acc)")
         self.myDict["Invesco China"] = Fund("GB00BJ04HS18", "Invesco China Equity Fund (UK)")
-        self.myDict["JPM Emerging"] = Fund("GB00BNTD9T28", "JPM Emerging Europe Equity II")
+        self.myDict["JPM Emerging"] = Fund("GB00BNTD9T28", "JPM Emerging Europe Equity II", 10000)
         self.myDict["Jupiter Global"] = Fund("GB00B4PF5918", "Jupiter Global Emerging Markets Fund")
         self.myDict["Jupiter Merlin"] = Fund("GB00B4WDT300", "Jupiter Merlin Monthly Income Select")
         self.myDict["L&G World Sus"] = Fund("GB00B28PVN01", "Legal & General Future World Sust UK Eq Foc I Class Acc")
@@ -46,7 +46,7 @@ class FundList:
         self.myDict["91 Income"] = Fund("GB00BF4JM237", "Ninety One Global Total Return Credit Fund I GBP Inc2")
         self.myDict["Money Market"] = Fund("GB00B8XYYQ86", "Royal London Short Term Money Market Fund")
         self.myDict["Schroder Asian"] = Fund("GB00B559X853", "Schroder Asian Income Fund")
-        self.myDict["Schroder High Yield"] = Fund("GB00B5143284", "Schroder High Yield Opportunities Fund")
+        self.myDict["Schroder High Yield"] = Fund("GB00B5143284", "Schroder High Yield Opportunities Fund", 0.1)
         self.myDict["UBS S&P 500"] = Fund("GB00BMN91T34", "UBS S&P 500 Index Fund")
         self.myDict["Van U.S Equity"] = Fund("GB00B5B74S01", "Vanguard U.S. Equity Index Fund")
         self.myDict["Van Gilt"] = Fund("GB00B4M89245", "Vanguard U.K. Long Duration Gilt Index Fund")
