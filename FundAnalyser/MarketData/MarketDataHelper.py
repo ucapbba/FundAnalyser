@@ -1,6 +1,21 @@
+'''
+MarketDataHelper (:mod:`FundAnalyser.MarketData.MarketDataHelper`)
+========================================================
+
+.. currentmodule:: FundAnalyser.MarketData.MarketDataHelper
+
+The :mod:`FundAnalyser.MarketData.MarketDataHelper` is class that contains the market data (dates and fixings)
+It also allows to transform the data into different forms checks for inconsistencies in the data.
+The helper is pased to the :class:`FundAnalyser.MarketData.Fund` 
+
+.. autoclass:: MarketDataHelper
+
+'''
+
+
 import string
-from Base.BaseDataHelper import BaseDataHelper
-from Base.MiscFunctions import Misc
+from FundAnalyser.Base.BaseDataHelper import BaseDataHelper
+from FundAnalyser.Base.MiscFunctions import Misc
 from numpy import ndarray, datetime64
 from pandas import DataFrame
 import numpy as np
@@ -18,11 +33,17 @@ class MarketDataHelper(BaseDataHelper):
         self.myEndDate = Misc.toDate(_myEndDate)
         
     def IsEmpty(self) -> bool:
+        '''
+        Check the internal dataFrame member is populated
+        '''
         if self.myDataFrame.empty:
             return True
         return False
 
     def HasFullDatesRange(self,) -> bool:
+        '''
+        Check the dates range obtained from datasource match those of our report input
+        '''
         dates = self.myDataFrame['Date']
         startDate = Misc.toDate(str(dates[0]))
         endDate = Misc.toDate(dates[dates.size - 1]) + np.timedelta64(1, 'D')

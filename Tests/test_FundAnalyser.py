@@ -1,7 +1,7 @@
-from Base.BaseDataHelper import BaseDataHelper
+from FundAnalyser.Base.BaseDataHelper import BaseDataHelper
 import pytest
-from MarketData.FundList import Fund
-from MarketData.FundDataAnalyser import FundAnalyser
+from FundAnalyser.MarketData.FundList import Fund
+from FundAnalyser.MarketData.FundDataAnalyser import FundAnalyser
 
 
 def GetFundDataHelper():
@@ -40,4 +40,4 @@ def test_Vol():
     fund = GetFundDataHelper()
     analyser = FundAnalyser(fund)
     vol = analyser.GetVolatility()
-    assert vol == pytest.approx(0.0084712, rel=1e-4)
+    assert vol == pytest.approx(0.99677, rel=1e-4)

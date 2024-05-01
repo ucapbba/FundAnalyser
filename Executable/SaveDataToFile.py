@@ -1,7 +1,7 @@
-from Base.BaseDataHelper import BaseDataHelper
-from MarketData.FundList import Fund
-import Globals.Functions as gf
-import Globals.Variables as gv
+from FundAnalyser.Base.BaseDataHelper import BaseDataHelper
+from FundAnalyser.MarketData.FundList import Fund
+import FundAnalyser.Globals.Functions as gf
+import FundAnalyser.Globals.Variables as gv
 
 fund = Fund("GB00B5N99561", "Artemis Global Income Fund Inc")
 

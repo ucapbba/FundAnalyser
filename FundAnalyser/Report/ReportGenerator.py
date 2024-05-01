@@ -1,7 +1,24 @@
+'''
+ReportGenerator (:mod:`FundAnalyser.Report.ReportGenerator`)
+================================================================
+
+.. currentmodule:: FundAnalyser.Report.ReportGenerator
+
+The :mod:`FundAnalyser.Report.ReportGenerator` module provides functionality for creating Excel reports
+from using the analysed market data 
+
+Functions
+---------
+
+.. autoclass:: FundReportGenerator
+
+'''
+
+
 import os
-from MarketData.FundList import FundList
+from FundAnalyser.MarketData.FundList import FundList
 import xlwt
-import Globals.Variables as gv
+import FundAnalyser.Globals.Variables as gv
 
 
 class FundReportGenerator:
@@ -11,6 +28,7 @@ class FundReportGenerator:
         self.fundList = _fundList
     
     def WriteToExcel(self, filename):
+        '''writes fund data to excel called filename'''
         book = xlwt.Workbook()
         filename = filename + "_" + "_" + gv.startDate + "_" + gv.endDate + ".xls"
         self.CreateIndicatorsSheet(book)
@@ -19,6 +37,7 @@ class FundReportGenerator:
         book.save(cwd + "/Data/Reports/" + filename)
 
     def CreateWarningsSheet(self, book: xlwt.Workbook):
+        '''Creates an Excel sheet dedicated to warnings'''
         shWarnings = book.add_sheet("Warnings")
         shWarnings.write(0, 0, "Fund")
         shWarnings.write(0, 1, "Warning Messages")
@@ -49,6 +68,7 @@ class FundReportGenerator:
         shWarnings.col(1).width = 10000
 
     def CreateIndicatorsSheet(self, book: xlwt.Workbook):
+        '''Creates an Excel sheet with fund indicators'''
         shIndicators = book.add_sheet("Indicators")
         row = 0
         column = 1

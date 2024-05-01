@@ -1,4 +1,17 @@
-from MarketData.Fund import Fund
+'''
+FundList (:mod:`FundAnalyser.MarketData.FundList`)
+========================================================
+
+.. currentmodule:: FundAnalyser.MarketData.FundList
+
+The :mod:`FundAnalyser.MarketData.FundList` is a list of funds on which the report is generated.  
+It is a dict with a key and a :class:`FundAnalyser.MarketData.Fund` populated with ISIN and full name
+
+.. autoclass:: FundList
+
+'''
+
+from FundAnalyser.MarketData.Fund import Fund
 
 
 class FundList:
@@ -52,7 +65,13 @@ class FundList:
         self.myDict["Van Gilt"] = Fund("GB00B4M89245", "Vanguard U.K. Long Duration Gilt Index Fund")
 
     def GetFundList(self) -> list:
+        '''
+        Returns the whole fund list 
+        '''
         return self.myList
 
     def GetFund(self, fundKey: str) -> Fund:
+        '''
+        Return a specifc fund based on string
+        '''
         return self.myDict[fundKey]

@@ -1,6 +1,6 @@
 import yfinance as yf
 import pytest
-from MarketData.FundList import FundList
+from FundAnalyser.MarketData.FundList import FundList
 
 
 def test_MarketData():

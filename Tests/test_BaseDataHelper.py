@@ -1,6 +1,6 @@
 import pytest
-from Base.BaseDataHelper import BaseDataHelper
-from MarketData.FundList import Fund
+from FundAnalyser.Base.BaseDataHelper import BaseDataHelper
+from FundAnalyser.MarketData.FundList import Fund
 
 
 def test_LoadCSV():

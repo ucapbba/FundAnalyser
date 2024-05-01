@@ -1,10 +1,31 @@
+'''
+Fund (:mod:`FundAnalyser.MarketData.Fund`)
+==========================================
+
+.. currentmodule:: FundAnalyser.MarketData.Fund
+
+The :mod:`FundAnalyser.MarketData.Fund` contains a fund class
+
+.. autoclass:: Fund
+
+'''
+
+
 from numpy import double, void
-from MarketData.MarketDataHelper import MarketDataHelper
-import Globals.Variables as gv
+from FundAnalyser.MarketData.MarketDataHelper import MarketDataHelper
+import FundAnalyser.Globals.Variables as gv
 import string
 
 
 class Fund:
+    '''
+    Data Members
+    ------------
+    ISIN: string
+    fullName: string
+    dataHelper: MarketDataHelper
+    indicators: dict
+    '''
     ISIN: string
     fullName: string
     dataHelper: MarketDataHelper
@@ -18,6 +39,7 @@ class Fund:
         self.dataHelper = None
         
     def SetIndicators(self, _mean: double, _absGrowth: double, _growthOnMean: double, _volatility: double) -> void:
+        '''Sets the calculated indicators on the Fund'''
         self.indicators[gv.MEAN] = _mean
         self.indicators[gv.ABS_GROWTH] = _absGrowth
         self.indicators[gv.GROWTH_MEAN] = _growthOnMean
@@ -26,4 +48,5 @@ class Fund:
         self.indicators[gv.AVE_VALUE] = self.units * _mean / 100
             
     def setDataHelper(self, _dataHelper: MarketDataHelper) -> void:
+        '''Sets the :class:`FundAnalyser.MarketData.MarketDataHelper`'''
         self.dataHelper = _dataHelper

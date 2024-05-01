@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>bbd55af8-c887-43cf-99ac-eab14a2c84e8</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>Executable\AnalyseAllFunds.py</StartupFile>
+    <StartupFile>Executable\AnalyseSingleFund.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -22,33 +22,41 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Executable\AnalyseSingleFund.py" />
-    <Compile Include="Base\BaseDataHelper.py" />
-    <Compile Include="Base\BasePlotter.py" />
-    <Compile Include="Base\MiscFunctions.py" />
-    <Compile Include="Globals\Functions.py" />
-    <Compile Include="Globals\Variables.py" />
-    <Compile Include="MarketData\Fund.py" />
-    <Compile Include="MarketData\FundDataAnalyser.py" />
-    <Compile Include="MarketData\FundList.py" />
-    <Compile Include="MarketData\MarketDataHelper.py" />
-    <Compile Include="MarketData\MarketDataPlotter.py" />
     <Compile Include="Executable\AnalyseAllFunds.py" />
+    <Compile Include="Executable\AnalyseSingleFund.py" />
     <Compile Include="Executable\SaveDataToFile.py" />
-    <Compile Include="Report\ReportGenerator.py" />
+    <Compile Include="Executable\__init__.py" />
+    <Compile Include="FundAnalyser\Base\BaseDataHelper.py" />
+    <Compile Include="FundAnalyser\Base\BasePlotter.py" />
+    <Compile Include="FundAnalyser\Base\MiscFunctions.py" />
+    <Compile Include="FundAnalyser\Globals\Functions.py" />
+    <Compile Include="FundAnalyser\Globals\Variables.py" />
+    <Compile Include="FundAnalyser\MarketData\Fund.py" />
+    <Compile Include="FundAnalyser\MarketData\FundDataAnalyser.py" />
+    <Compile Include="FundAnalyser\MarketData\FundList.py" />
+    <Compile Include="FundAnalyser\MarketData\MarketDataHelper.py" />
+    <Compile Include="FundAnalyser\MarketData\MarketDataPlotter.py" />
+    <Compile Include="FundAnalyser\Report\ReportGenerator.py" />
     <Compile Include="Tests\test_BaseDataHelper.py" />
     <Compile Include="Tests\test_FundAnalyser.py" />
     <Compile Include="Tests\test_MarketData.py" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Base\" />
-    <Folder Include="MarketData\" />
+    <Folder Include="Data\" />
+    <Folder Include="Data\Reports\" />
+    <Folder Include="Data\Yahoo\" />
+    <Folder Include="Data\Yahoo\TestData\" />
     <Folder Include="Executable\" />
-    <Folder Include="Globals\" />
-    <Folder Include="Report\" />
+    <Folder Include="FundAnalyser\" />
+    <Folder Include="FundAnalyser\Base\" />
+    <Folder Include="FundAnalyser\Globals\" />
+    <Folder Include="FundAnalyser\MarketData\" />
+    <Folder Include="FundAnalyser\Report\" />
     <Folder Include="Tests\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Data\Reports\FundReport.xls" />
+    <Content Include="Data\Yahoo\TestData\Artemis Global Income Fund Inc_2023-11-01_2023-12-01.csv" />
     <Content Include="Tests\test_Misc.py" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
