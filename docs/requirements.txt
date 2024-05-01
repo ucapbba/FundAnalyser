@@ -3,3 +3,4 @@ sphinx-gallery
 furo
 sphinxcontrib-katex
 numpydoc
+matplotlib
