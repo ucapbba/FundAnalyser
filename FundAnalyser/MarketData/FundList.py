@@ -1,4 +1,17 @@
-from MarketData.Fund import Fund
+'''
+FundList (:mod:`FundAnalyser.MarketData.FundList`)
+========================================================
+
+.. currentmodule:: FundAnalyser.MarketData.FundList
+
+The :mod:`FundAnalyser.MarketData.FundList` is a list of funds on which the report is generated.  
+It is a dict with a key and a :class:`FundAnalyser.MarketData.Fund` populated with ISIN and full name
+
+.. autoclass:: FundList
+
+'''
+
+from FundAnalyser.MarketData.Fund import Fund
 
 
 class FundList:
@@ -8,7 +21,7 @@ class FundList:
         self.myDict = {}
         self.myDict["7IM"] = Fund("GB00B1LBG003", "7IM Sustainable Balance Fund C Inc")
         self.myDict["abrdn Latin"] = Fund("GB00B4R0SD95", "abrdn Latin American Equity Fund")
-        self.myDict["abrdn UK"] = Fund("GB00BRK2VS91", "abrdn UK Income Equity Fund")
+        '''self.myDict["abrdn UK"] = Fund("GB00BRK2VS91", "abrdn UK Income Equity Fund")
         self.myDict["abrdn UK sus"] = Fund("GB00B131GH54", "abrdn UK Sus & Resp Investment Equity")
         self.myDict["Artemis"] = Fund("GB00B5N99561", "Artemis Global Income Fund Inc")
         self.myDict["Artemis small"] = Fund("GB00BMMV5766", "Artemis US Smaller Companies Fund")
@@ -49,10 +62,16 @@ class FundList:
         self.myDict["Schroder High Yield"] = Fund("GB00B5143284", "Schroder High Yield Opportunities Fund", 0.1)
         self.myDict["UBS S&P 500"] = Fund("GB00BMN91T34", "UBS S&P 500 Index Fund")
         self.myDict["Van U.S Equity"] = Fund("GB00B5B74S01", "Vanguard U.S. Equity Index Fund")
-        self.myDict["Van Gilt"] = Fund("GB00B4M89245", "Vanguard U.K. Long Duration Gilt Index Fund")
+        self.myDict["Van Gilt"] = Fund("GB00B4M89245", "Vanguard U.K. Long Duration Gilt Index Fund")'''
 
     def GetFundList(self) -> list:
+        '''
+        Returns the whole fund list 
+        '''
         return self.myList
 
     def GetFund(self, fundKey: str) -> Fund:
+        '''
+        Return a specifc fund based on string
+        '''
         return self.myDict[fundKey]

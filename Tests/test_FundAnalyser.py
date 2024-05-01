@@ -1,7 +1,7 @@
-from Base.BaseDataHelper import BaseDataHelper
+from FundAnalyser.Base.BaseDataHelper import BaseDataHelper
 import pytest
-from MarketData.FundList import Fund
-from MarketData.FundDataAnalyser import FundAnalyser
+from FundAnalyser.MarketData.FundList import Fund
+from FundAnalyser.MarketData.FundDataAnalyser import FundAnalyser
 
 
 def GetFundDataHelper():

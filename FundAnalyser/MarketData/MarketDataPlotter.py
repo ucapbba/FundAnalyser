@@ -1,5 +1,5 @@
 import string
-from Base.BasePlotter import BasePlotter
+from FundAnalyser.Base.BasePlotter import BasePlotter
 import matplotlib.pyplot as plt
 import seaborn as sns
 

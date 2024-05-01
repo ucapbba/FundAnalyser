@@ -1,8 +1,22 @@
+'''
+BasePlotter (:mod:`FundAnalyser.Base.BasePlotter`)
+==================================================
+
+.. currentmodule:: FundAnalyser.Base.BasePlotter
+
+The :mod:`FundAnalyser.Base.BasePlotter` module provides functionality data visualisation
+Functions
+---------
+
+.. autoclass:: BasePlotter
+
+'''
+
 import string
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.colors import LogNorm
-from Base.BaseDataHelper import BaseDataHelper
+from FundAnalyser.Base.BaseDataHelper import BaseDataHelper
 import matplotlib
 
 

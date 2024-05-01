@@ -1,4 +1,4 @@
-from Base.MiscFunctions import Misc
+from FundAnalyser.Base.MiscFunctions import Misc
 import pandas as pd
 
 
