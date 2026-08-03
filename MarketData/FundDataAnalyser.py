@@ -15,12 +15,12 @@ class FundAnalyser:
         self.data = _fund.dataHelper.GetDataFrame()
         self.closeData = self.data[gv.close]
         self.closeMean = self.closeData.mean()
-    
+
     def GetAbsGrowth(self) -> double:
         first = self.closeData[0]
         last = self.closeData[self.closeData.size - 1]
         return (last - first) / last * 100
-    
+
     def GetGrowthOnMean(self) -> double:
         last = self.closeData[self.closeData.size - 1]
         return (last - self.closeMean) / last * 100
@@ -28,7 +28,7 @@ class FundAnalyser:
     def AddRollingAverage(self) -> void:
         self.data['MA5'] = self.closeData.rolling(window=5).mean()
         self.data['MA10'] = self.closeData.rolling(window=5).mean()
-     
+
     def GetVolatility(self) -> double:
         points = self.closeData
         vol = 0

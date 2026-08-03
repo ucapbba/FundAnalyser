@@ -7,7 +7,7 @@ from MarketData.FundDataAnalyser import FundAnalyser
 def GetFundDataHelper():
     startDate = '2023-11-01'
     endDate = '2023-12-01'
-    fund = Fund("GB00B5N99561", "Artemis Global Income Fund Inc")
+    fund = Fund(ISIN="GB00B5N99561", fullName="Artemis Global Income Fund Inc")
     helper = BaseDataHelper("/Data/Yahoo/TestData/", fund.fullName + "_" + startDate + "_" + endDate + ".csv")
     helper.LoadCSVtoDF()
     helper.myDataFrame.reset_index()
@@ -28,7 +28,7 @@ def test_AbsGrowth():
     growth = analyser.GetAbsGrowth()
     assert growth == pytest.approx(2.674, rel=1e-2)
 
-    
+
 def test_GrowthOnMean():
     fund = GetFundDataHelper()
     analyser = FundAnalyser(fund)

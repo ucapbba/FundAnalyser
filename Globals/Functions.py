@@ -10,11 +10,12 @@ import yfinance as yf
 
 
 def PopulateAllFundData(startDate, endDate, fundList: FundList) -> np.void:
-    for fundKey, fund in fundList.myDict.items():
-        fund = fundList.GetFund(fundKey)
+    for fundKey, fund in fundList.items():
         print("Processing key " + fundKey)
         data = getData(fund, startDate, endDate)
         data = data.reset_index()
+        # yfinance returns MultiIndex columns (Price, Ticker); flatten so 'Date'/'Close' are plain columns
+        data.columns = data.columns.get_level_values(0)
         dataHelper = MarketDataHelper(data, startDate, endDate)
         if dataHelper.IsEmpty():
             print("Problem accessing Yahoo data for " + fundKey)
@@ -26,7 +27,7 @@ def PopulateAllFundData(startDate, endDate, fundList: FundList) -> np.void:
 
 
 def PlotAllFundData(fundList: FundList) -> np.void:
-    for fundKey, fund in fundList.myDict.items():
+    for fundKey, fund in fundList.items():
         if fund.dataHelper is None:
             continue
         plotter = MarketDtaPlotter(fund.dataHelper)
@@ -35,7 +36,7 @@ def PlotAllFundData(fundList: FundList) -> np.void:
 
 
 def GetAllFundIndicators(fundList: FundList) -> FundList:
-    for fundKey, fund in fundList.myDict.items():
+    for fundKey, fund in fundList.items():
         if fund.dataHelper is None:
             continue
         analyser = FundAnalyser(fund)

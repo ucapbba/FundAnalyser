@@ -52,7 +52,7 @@ class BasePlotter():
         ZRESI = self.helper.ZRESI
         _min = self.helper.min
         _max = self.helper.max
-        ax.pcolormesh(XRESI, YRESI, ZRESI, norm=LogNorm(vmin=_min, vmax=_max),\
+        ax.pcolormesh(XRESI, YRESI, ZRESI, norm=LogNorm(vmin=_min, vmax=_max),
                       rasterized=True, shading='gouraud')
         ax.set(title=title)
         plt.axis('off')

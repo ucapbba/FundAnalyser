@@ -1,58 +1,55 @@
+from collections import UserDict
+
 from MarketData.Fund import Fund
 
 
-class FundList:
-    myDict: dict
-
+class FundList(UserDict):
     def __init__(self):
-        self.myDict = {}
-        self.myDict["7IM"] = Fund("GB00B1LBG003", "7IM Sustainable Balance Fund C Inc")
-        self.myDict["abrdn Latin"] = Fund("GB00B4R0SD95", "abrdn Latin American Equity Fund")
-        self.myDict["abrdn UK"] = Fund("GB00BRK2VS91", "abrdn UK Income Equity Fund")
-        self.myDict["abrdn UK sus"] = Fund("GB00B131GH54", "abrdn UK Sus & Resp Investment Equity")
-        self.myDict["Artemis"] = Fund("GB00B5N99561", "Artemis Global Income Fund Inc")
-        self.myDict["Artemis small"] = Fund("GB00BMMV5766", "Artemis US Smaller Companies Fund")
-        self.myDict["Aviva"] = Fund("GB00BYYZ2464", "Aviva Investors UK Property Feeder Inc Fund 2 GBP Inc")
-        self.myDict["Baillie Gifford"] = Fund("GB00B1W0GF10", "Baillie Gifford High Yield Bond")
-        self.myDict["Barclays Global"] = Fund("GB00B4WZMX77", "Barclays Global Core Fund")
-        self.myDict["Barings German"] = Fund("GB00B8DDY871", "Barings German Growth Trust")
-        self.myDict["Barings Korea"] = Fund("GB00B8DD3Y69", "Barings Korea Trust")
-        self.myDict["Black Gold"] = Fund("GB00B5ZNJ896", "Blackrock Gold General Fund")
-        self.myDict["Black Natural"] = Fund("GB00B6865B79", "BlackRock Natural Resources Fund D Acc")
-        self.myDict["CT Global Bond"] = Fund("GB00B8C2M701", "CT Global Bond Fund")
-        self.myDict["CT Global Real"] = Fund("GB00BJ05NG47", "CT Global Real Estate Securities")
-        # self.myDict["Fidelity Emerging"] = Fund("GB00BJ05NG47", "Fidelity Index Pacific ex Japan Fund") #Missing
-        self.myDict["Fidelity Pacific"] = Fund("GB00BHZK8G51", "Fidelity Index Pacific ex Japan Fund")
-        self.myDict["Fidelity Sustainable"] = Fund("GB00BQBG6R76", "Fidelity Sustainable Emerging Markets Equity Fund")
-        self.myDict["GS Emerging"] = Fund("LU0858288516", "Goldman Sachs Emerging Markets Equity Portfolio R Inc GBP")
-        self.myDict["GS India"] = Fund("LU0858290173", "Goldman Sachs India Equity Portfolio R Inc GBP")
-        self.myDict["HSBC Europe"] = Fund("GB00B80QGH28", "HSBC European Index Fund Accumulation C")
-        self.myDict["HSBC FTSE 100"] = Fund("GB00B80QFR50", "HSBC FTSE 100 Index")
-        self.myDict["HSBC All World"] = Fund("GB00BMJJJG09", "HSBC FTSE All World Index Fund")
-        self.myDict["HSBC Japan"] = Fund("GB00B80QGN87", "HSBC Japan Index")
-        self.myDict["HSBC Gilt"] = Fund("GB00B80QG276", "HSBC UK Gilt Index Fund")
-        self.myDict["HSBC World"] = Fund("GB00B7L42X66", "HSBC World Selection Cautious Portfolio")
-        self.myDict["Invesco Pacific"] = Fund("GB00BJ04K596", "Invesco Pacific Fund (UK) Y (Acc)")
-        self.myDict["Invesco China"] = Fund("GB00BJ04HS18", "Invesco China Equity Fund (UK)")
-        self.myDict["JPM Emerging"] = Fund("GB00BNTD9T28", "JPM Emerging Europe Equity II", 10000)
-        self.myDict["Jupiter Global"] = Fund("GB00B4PF5918", "Jupiter Global Emerging Markets Fund")
-        self.myDict["Jupiter Merlin"] = Fund("GB00B4WDT300", "Jupiter Merlin Monthly Income Select")
-        self.myDict["L&G World Sus"] = Fund("GB00B28PVN01", "Legal & General Future World Sust UK Eq Foc I Class Acc")
-        self.myDict["L&G Index"] = Fund("GB00B88Y0217", "Legal & General Multi-Index 4 Fund")
-        self.myDict["M&G Global Emerging"] = Fund("GB00B4TL2D89", "M&G Emerging Markets Bond Fund")
-        self.myDict["M&G Global Gov"] = Fund("GB00B700F033", "M&G Global Government Bond Fund")
-        self.myDict["M&G Global Macro"] = Fund("GB00B78PGS53", "M&G Global Macro Bond Fund")
-        self.myDict["91 Gold"] = Fund("GB00B1XFGM25", "Ninety One Global Gold Fund")
-        self.myDict["91 Income"] = Fund("GB00BF4JM237", "Ninety One Global Total Return Credit Fund I GBP Inc2")
-        self.myDict["Money Market"] = Fund("GB00B8XYYQ86", "Royal London Short Term Money Market Fund")
-        self.myDict["Schroder Asian"] = Fund("GB00B559X853", "Schroder Asian Income Fund")
-        self.myDict["Schroder High Yield"] = Fund("GB00B5143284", "Schroder High Yield Opportunities Fund", 0.1)
-        self.myDict["UBS S&P 500"] = Fund("GB00BMN91T34", "UBS S&P 500 Index Fund")
-        self.myDict["Van U.S Equity"] = Fund("GB00B5B74S01", "Vanguard U.S. Equity Index Fund")
-        self.myDict["Van Gilt"] = Fund("GB00B4M89245", "Vanguard U.K. Long Duration Gilt Index Fund")
-
-    def GetFundList(self) -> list:
-        return self.myList
+        super().__init__()
+        self["7IM"] = Fund(ISIN="GB00B1LBG003", fullName="7IM Sustainable Balance Fund C Inc")
+        self["abrdn Latin"] = Fund(ISIN="GB00B4R0SD95", fullName="abrdn Latin American Equity Fund")
+        self["abrdn UK"] = Fund(ISIN="GB00BRK2VS91", fullName="abrdn UK Income Equity Fund")
+        self["abrdn UK sus"] = Fund(ISIN="GB00B131GH54", fullName="abrdn UK Sus & Resp Investment Equity")
+        self["Artemis"] = Fund(ISIN="GB00B5N99561", fullName="Artemis Global Income Fund Inc")
+        self["Artemis small"] = Fund(ISIN="GB00BMMV5766", fullName="Artemis US Smaller Companies Fund")
+        self["Aviva"] = Fund(ISIN="GB00BYYZ2464", fullName="Aviva Investors UK Property Feeder Inc Fund 2 GBP Inc")
+        self["Baillie Gifford"] = Fund(ISIN="GB00B1W0GF10", fullName="Baillie Gifford High Yield Bond")
+        self["Barclays Global"] = Fund(ISIN="GB00B4WZMX77", fullName="Barclays Global Core Fund")
+        self["Barings German"] = Fund(ISIN="GB00B8DDY871", fullName="Barings German Growth Trust")
+        self["Barings Korea"] = Fund(ISIN="GB00B8DD3Y69", fullName="Barings Korea Trust")
+        self["Black Gold"] = Fund(ISIN="GB00B5ZNJ896", fullName="Blackrock Gold General Fund")
+        self["Black Natural"] = Fund(ISIN="GB00B6865B79", fullName="BlackRock Natural Resources Fund D Acc")
+        self["CT Global Bond"] = Fund(ISIN="GB00B8C2M701", fullName="CT Global Bond Fund")
+        self["CT Global Real"] = Fund(ISIN="GB00BJ05NG47", fullName="CT Global Real Estate Securities")
+        # self["Fidelity Emerging"] = Fund(ISIN="GB00BJ05NG47", fullName="Fidelity Index Pacific ex Japan Fund") #Missing
+        self["Fidelity Pacific"] = Fund(ISIN="GB00BHZK8G51", fullName="Fidelity Index Pacific ex Japan Fund")
+        self["Fidelity Sustainable"] = Fund(ISIN="GB00BQBG6R76", fullName="Fidelity Sustainable Emerging Markets Equity Fund")
+        self["GS Emerging"] = Fund(ISIN="LU0858288516", fullName="Goldman Sachs Emerging Markets Equity Portfolio R Inc GBP")
+        self["GS India"] = Fund(ISIN="LU0858290173", fullName="Goldman Sachs India Equity Portfolio R Inc GBP")
+        self["HSBC Europe"] = Fund(ISIN="GB00B80QGH28", fullName="HSBC European Index Fund Accumulation C")
+        self["HSBC FTSE 100"] = Fund(ISIN="GB00B80QFR50", fullName="HSBC FTSE 100 Index")
+        self["HSBC All World"] = Fund(ISIN="GB00BMJJJG09", fullName="HSBC FTSE All World Index Fund")
+        self["HSBC Japan"] = Fund(ISIN="GB00B80QGN87", fullName="HSBC Japan Index")
+        self["HSBC Gilt"] = Fund(ISIN="GB00B80QG276", fullName="HSBC UK Gilt Index Fund")
+        self["HSBC World"] = Fund(ISIN="GB00B7L42X66", fullName="HSBC World Selection Cautious Portfolio")
+        self["Invesco Pacific"] = Fund(ISIN="GB00BJ04K596", fullName="Invesco Pacific Fund (UK) Y (Acc)")
+        self["Invesco China"] = Fund(ISIN="GB00BJ04HS18", fullName="Invesco China Equity Fund (UK)")
+        self["JPM Emerging"] = Fund(ISIN="GB00BNTD9T28", fullName="JPM Emerging Europe Equity II", units=10000)
+        self["Jupiter Global"] = Fund(ISIN="GB00B4PF5918", fullName="Jupiter Global Emerging Markets Fund")
+        self["Jupiter Merlin"] = Fund(ISIN="GB00B4WDT300", fullName="Jupiter Merlin Monthly Income Select")
+        self["L&G World Sus"] = Fund(ISIN="GB00B28PVN01", fullName="Legal & General Future World Sust UK Eq Foc I Class Acc")
+        self["L&G Index"] = Fund(ISIN="GB00B88Y0217", fullName="Legal & General Multi-Index 4 Fund")
+        self["M&G Global Emerging"] = Fund(ISIN="GB00B4TL2D89", fullName="M&G Emerging Markets Bond Fund")
+        self["M&G Global Gov"] = Fund(ISIN="GB00B700F033", fullName="M&G Global Government Bond Fund")
+        self["M&G Global Macro"] = Fund(ISIN="GB00B78PGS53", fullName="M&G Global Macro Bond Fund")
+        self["91 Gold"] = Fund(ISIN="GB00B1XFGM25", fullName="Ninety One Global Gold Fund")
+        self["91 Income"] = Fund(ISIN="GB00BF4JM237", fullName="Ninety One Global Total Return Credit Fund I GBP Inc2")
+        self["Money Market"] = Fund(ISIN="GB00B8XYYQ86", fullName="Royal London Short Term Money Market Fund")
+        self["Schroder Asian"] = Fund(ISIN="GB00B559X853", fullName="Schroder Asian Income Fund")
+        self["Schroder High Yield"] = Fund(ISIN="GB00B5143284", fullName="Schroder High Yield Opportunities Fund", units=0.1)
+        self["UBS S&P 500"] = Fund(ISIN="GB00BMN91T34", fullName="UBS S&P 500 Index Fund")
+        self["Van U.S Equity"] = Fund(ISIN="GB00B5B74S01", fullName="Vanguard U.S. Equity Index Fund")
+        self["Van Gilt"] = Fund(ISIN="GB00B4M89245", fullName="Vanguard U.K. Long Duration Gilt Index Fund")
 
     def GetFund(self, fundKey: str) -> Fund:
-        return self.myDict[fundKey]
+        return self[fundKey]

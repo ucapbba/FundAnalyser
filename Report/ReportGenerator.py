@@ -6,10 +6,10 @@ import Globals.Variables as gv
 
 class FundReportGenerator:
     fundList: FundList
-    
+
     def __init__(self, _fundList: FundList):
         self.fundList = _fundList
-    
+
     def WriteToExcel(self, filename):
         book = xlwt.Workbook()
         filename = filename + "_" + "_" + gv.startDate + "_" + gv.endDate + ".xls"
@@ -23,8 +23,8 @@ class FundReportGenerator:
         shWarnings.write(0, 0, "Fund")
         shWarnings.write(0, 1, "Warning Messages")
         row = 1
-        for fundKey, fund in self.fundList.myDict.items():
-            if bool(fund.indicators) is False:
+        for fundKey, fund in self.fundList.items():
+            if not fund.indicators:
                 shWarnings.write(row, 0, fundKey)
                 shWarnings.write(row, 1, "No Indicators found for fund")
                 row += 1
@@ -52,7 +52,7 @@ class FundReportGenerator:
         shIndicators = book.add_sheet("Indicators")
         row = 0
         column = 1
-        for fundKey, fund in self.fundList.myDict.items():
+        for fundKey, fund in self.fundList.items():
             if row == 0:  # add column names
                 shIndicators.write(0, 0, "Fund")
                 for indicatorKey, indicator in fund.indicators.items():
@@ -65,12 +65,8 @@ class FundReportGenerator:
             for indicatorKey, indicator in fund.indicators.items():
                 shIndicators.write(row, column, indicator)
                 column += 1
-            
+
             row += 1
-            
-        shIndicators.col(0).width = gv.COL_WIDTH
-        shIndicators.col(1).width = gv.COL_WIDTH
-        shIndicators.col(2).width = gv.COL_WIDTH
-        shIndicators.col(3).width = gv.COL_WIDTH
-        shIndicators.col(4).width = gv.COL_WIDTH
-        shIndicators.col(5).width = gv.COL_WIDTH
+
+        for column in range(6):
+            shIndicators.col(column).width = gv.COL_WIDTH

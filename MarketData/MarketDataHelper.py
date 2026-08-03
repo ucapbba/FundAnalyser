@@ -16,7 +16,7 @@ class MarketDataHelper(BaseDataHelper):
         self.myDataFrame = _myDataFrame
         self.myStartDate = Misc.toDate(_myStartDate)
         self.myEndDate = Misc.toDate(_myEndDate)
-        
+
     def IsEmpty(self) -> bool:
         if self.myDataFrame.empty:
             return True

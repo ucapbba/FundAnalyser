@@ -6,7 +6,7 @@ from MarketData.FundList import Fund
 def test_LoadCSV():
     startDate = '2023-11-01'
     endDate = '2023-12-01'
-    fund = Fund("GB00B5N99561", "Artemis Global Income Fund Inc")
+    fund = Fund(ISIN="GB00B5N99561", fullName="Artemis Global Income Fund Inc")
     helper = BaseDataHelper("/Data/Yahoo/TestData/", fund.fullName + "_" + startDate + "_" + endDate + ".csv")
     helper.LoadCSVtoDF()
     data = helper.GetDataFrame()

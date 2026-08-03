@@ -15,7 +15,7 @@ class BaseDataHelper:
         self.path = _path
         self.filename = _fname
         self.myDataFrame = _myDataFrame
-    
+
     def CreateDataFrame(self):
         df = DataFrame(self.myArray)
         self.myDataFrame = df
@@ -30,7 +30,7 @@ class BaseDataHelper:
         cwd = os.getcwd()
         filePath = self.GetFilePath()
         self.myArray = loadtxt(cwd + filePath)
-        
+
     def LoadCSVtoDF(self):
         cwd = os.getcwd()
         filePath = self.GetFilePath()
@@ -40,7 +40,7 @@ class BaseDataHelper:
         cwd = os.getcwd()
         filePath = self.GetFilePath()
         self.myDataFrame.to_csv(cwd + filePath)
-        
+
     def TruncateArray(self, size: int) -> void:
         newArray = self.myArray[:size]
         self.myArray = newArray

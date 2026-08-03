@@ -1,6 +1,6 @@
 # Report
-startDate = '2022-12-14'
-endDate = '2023-12-15'
+startDate = '2025-12-14'
+endDate = '2026-08-03'
 close = 'Close'
 COL_WIDTH = 4000
 
@@ -12,11 +12,8 @@ VOL = "Volatility"
 UNITS = "Units"
 AVE_VALUE = "Average Value"
 
-# Warnings 
+# Warnings
 MIN_GROWTH = -10
 MAX_VOL = 10
 MAX_VAL = 1000
 MIN_VAL = 100
-
-
-
