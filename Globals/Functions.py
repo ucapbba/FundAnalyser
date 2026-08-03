@@ -9,55 +9,55 @@ from Base.BaseDataHelper import BaseDataHelper
 import yfinance as yf
 
 
-def PopulateAllFundData(startDate, endDate, fundList: FundList) -> np.void:
-    for fundKey, fund in fundList.items():
-        print("Processing key " + fundKey)
-        data = getData(fund, startDate, endDate)
+def populate_all_fund_data(start_date, end_date, fund_list: FundList) -> np.void:
+    for fund_key, fund in fund_list.items():
+        print("Processing key " + fund_key)
+        data = get_data(fund, start_date, end_date)
         data = data.reset_index()
         # yfinance returns MultiIndex columns (Price, Ticker); flatten so 'Date'/'Close' are plain columns
         data.columns = data.columns.get_level_values(0)
-        dataHelper = MarketDataHelper(data, startDate, endDate)
-        if dataHelper.IsEmpty():
-            print("Problem accessing Yahoo data for " + fundKey)
+        data_helper = MarketDataHelper(data, start_date, end_date)
+        if data_helper.is_empty():
+            print("Problem accessing Yahoo data for " + fund_key)
             print("")
             continue
-        dataHelper.HasFullDatesRange()
-        fund.setDataHelper(dataHelper)
+        data_helper.has_full_dates_range()
+        fund.set_data_helper(data_helper)
         print(" ")
 
 
-def PlotAllFundData(fundList: FundList) -> np.void:
-    for fundKey, fund in fundList.items():
-        if fund.dataHelper is None:
+def plot_all_fund_data(fund_list: FundList) -> np.void:
+    for fund_key, fund in fund_list.items():
+        if fund.data_helper is None:
             continue
-        plotter = MarketDtaPlotter(fund.dataHelper)
-        plotter.PlotSNS("Date", "Close", fund.fullName)
-        # plotter.plotScatter("Date", "Close", fund.fullName)
+        plotter = MarketDtaPlotter(fund.data_helper)
+        plotter.plot_sns("Date", "Close", fund.full_name)
+        # plotter.plot_scatter("Date", "Close", fund.full_name)
 
 
-def GetAllFundIndicators(fundList: FundList) -> FundList:
-    for fundKey, fund in fundList.items():
-        if fund.dataHelper is None:
+def get_all_fund_indicators(fund_list: FundList) -> FundList:
+    for fund_key, fund in fund_list.items():
+        if fund.data_helper is None:
             continue
         analyser = FundAnalyser(fund)
-        mean = analyser.closeMean
-        absGrowth = analyser.GetAbsGrowth()
-        growthOnMean = analyser.GetGrowthOnMean()
-        vol = analyser.GetVolatility()
-        # analyser.AddRollingAverage()
-        fund.SetIndicators(mean, absGrowth, growthOnMean, vol)
-        print(fund.fullName + " " + str(absGrowth) + " " + str(growthOnMean) + " " + str(vol))
-    return fundList
+        mean = analyser.close_mean
+        abs_growth = analyser.get_abs_growth()
+        growth_on_mean = analyser.get_growth_on_mean()
+        vol = analyser.get_volatility()
+        # analyser.add_rolling_average()
+        fund.set_indicators(mean, abs_growth, growth_on_mean, vol)
+        print(fund.full_name + " " + str(abs_growth) + " " + str(growth_on_mean) + " " + str(vol))
+    return fund_list
 
 
-def getData(fund: Fund, startDate, endDate, fromYahoo=True) -> DataFrame:
-    if fromYahoo is True:
+def get_data(fund: Fund, start_date, end_date, from_yahoo=True) -> DataFrame:
+    if from_yahoo is True:
         try:
-            data = yf.download(fund.ISIN, startDate, endDate)
+            data = yf.download(fund.isin, start_date, end_date)
             return data
         except BaseException:
-            print("Problem accessing Yahoo data for " + fund.fullName)
+            print("Problem accessing Yahoo data for " + fund.full_name)
     else:
-        helper = BaseDataHelper("/Data/Yahoo/", fund.fullName + "_" + startDate + "_" + endDate + ".csv")
-        helper.LoadCSVtoDF()
-        return helper.GetDataFrame()
+        helper = BaseDataHelper("/Data/Yahoo/", fund.full_name + "_" + start_date + "_" + end_date + ".csv")
+        helper.load_csv_to_df()
+        return helper.get_data_frame()

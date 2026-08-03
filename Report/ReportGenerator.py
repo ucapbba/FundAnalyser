@@ -5,68 +5,68 @@ import Globals.Variables as gv
 
 
 class FundReportGenerator:
-    fundList: FundList
+    fund_list: FundList
 
-    def __init__(self, _fundList: FundList):
-        self.fundList = _fundList
+    def __init__(self, fund_list: FundList):
+        self.fund_list = fund_list
 
-    def WriteToExcel(self, filename):
+    def write_to_excel(self, filename):
         book = xlwt.Workbook()
-        filename = filename + "_" + "_" + gv.startDate + "_" + gv.endDate + ".xls"
-        self.CreateIndicatorsSheet(book)
-        self.CreateWarningsSheet(book)
+        filename = filename + "_" + "_" + gv.start_date + "_" + gv.end_date + ".xls"
+        self.create_indicators_sheet(book)
+        self.create_warnings_sheet(book)
         cwd = os.getcwd()
         book.save(cwd + "/Data/Reports/" + filename)
 
-    def CreateWarningsSheet(self, book: xlwt.Workbook):
-        shWarnings = book.add_sheet("Warnings")
-        shWarnings.write(0, 0, "Fund")
-        shWarnings.write(0, 1, "Warning Messages")
+    def create_warnings_sheet(self, book: xlwt.Workbook):
+        sh_warnings = book.add_sheet("Warnings")
+        sh_warnings.write(0, 0, "Fund")
+        sh_warnings.write(0, 1, "Warning Messages")
         row = 1
-        for fundKey, fund in self.fundList.items():
+        for fund_key, fund in self.fund_list.items():
             if not fund.indicators:
-                shWarnings.write(row, 0, fundKey)
-                shWarnings.write(row, 1, "No Indicators found for fund")
+                sh_warnings.write(row, 0, fund_key)
+                sh_warnings.write(row, 1, "No Indicators found for fund")
                 row += 1
                 continue
             if fund.indicators[gv.ABS_GROWTH] < gv.MIN_GROWTH:
-                shWarnings.write(row, 0, fundKey)
-                shWarnings.write(row, 1, "abs growth is below 10%")
+                sh_warnings.write(row, 0, fund_key)
+                sh_warnings.write(row, 1, "abs growth is below 10%")
                 row += 1
             if fund.indicators[gv.VOL] > gv.MAX_VOL:
-                shWarnings.write(row, 0, fundKey)
-                shWarnings.write(row, 1, "volatility is high")
+                sh_warnings.write(row, 0, fund_key)
+                sh_warnings.write(row, 1, "volatility is high")
                 row += 1
             if fund.indicators[gv.AVE_VALUE] > gv.MAX_VAL:
-                shWarnings.write(row, 0, fundKey)
-                shWarnings.write(row, 1, "High allotment in fund")
+                sh_warnings.write(row, 0, fund_key)
+                sh_warnings.write(row, 1, "High allotment in fund")
                 row += 1
             if fund.indicators[gv.AVE_VALUE] < gv.MIN_VAL:
-                shWarnings.write(row, 0, fundKey)
-                shWarnings.write(row, 1, "Low allotment in fund")
+                sh_warnings.write(row, 0, fund_key)
+                sh_warnings.write(row, 1, "Low allotment in fund")
                 row += 1
-        shWarnings.col(0).width = 5000
-        shWarnings.col(1).width = 10000
+        sh_warnings.col(0).width = 5000
+        sh_warnings.col(1).width = 10000
 
-    def CreateIndicatorsSheet(self, book: xlwt.Workbook):
-        shIndicators = book.add_sheet("Indicators")
+    def create_indicators_sheet(self, book: xlwt.Workbook):
+        sh_indicators = book.add_sheet("Indicators")
         row = 0
         column = 1
-        for fundKey, fund in self.fundList.items():
+        for fund_key, fund in self.fund_list.items():
             if row == 0:  # add column names
-                shIndicators.write(0, 0, "Fund")
-                for indicatorKey, indicator in fund.indicators.items():
-                    shIndicators.write(0, column, indicatorKey)
+                sh_indicators.write(0, 0, "Fund")
+                for indicator_key, indicator in fund.indicators.items():
+                    sh_indicators.write(0, column, indicator_key)
                     column += 1
                 row = 1
             column = 0
-            shIndicators.write(row, column, fundKey)
+            sh_indicators.write(row, column, fund_key)
             column += 1
-            for indicatorKey, indicator in fund.indicators.items():
-                shIndicators.write(row, column, indicator)
+            for indicator_key, indicator in fund.indicators.items():
+                sh_indicators.write(row, column, indicator)
                 column += 1
 
             row += 1
 
         for column in range(6):
-            shIndicators.col(column).width = gv.COL_WIDTH
+            sh_indicators.col(column).width = gv.COL_WIDTH

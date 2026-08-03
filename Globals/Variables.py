@@ -1,6 +1,6 @@
 # Report
-startDate = '2025-12-14'
-endDate = '2026-08-03'
+start_date = '2025-12-14'
+end_date = '2026-08-03'
 close = 'Close'
 COL_WIDTH = 4000
 

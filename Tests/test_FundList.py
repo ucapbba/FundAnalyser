@@ -15,4 +15,4 @@ def test_FundList_isDictLikeAndIterable():
 def test_FundList_GetFund_matchesItemAccess():
     fundList = FundList()
 
-    assert fundList.GetFund("Artemis") is fundList["Artemis"]
+    assert fundList.get_fund("Artemis") is fundList["Artemis"]

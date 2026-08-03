@@ -7,32 +7,32 @@ from Globals import Variables as gv
 class FundAnalyser:
     fund: Fund
     data: DataFrame
-    closeData: Series
-    closeMean: double
+    close_data: Series
+    close_mean: double
 
-    def __init__(self, _fund: Fund):
-        self.fund = _fund
-        self.data = _fund.dataHelper.GetDataFrame()
-        self.closeData = self.data[gv.close]
-        self.closeMean = self.closeData.mean()
+    def __init__(self, fund: Fund):
+        self.fund = fund
+        self.data = fund.data_helper.get_data_frame()
+        self.close_data = self.data[gv.close]
+        self.close_mean = self.close_data.mean()
 
-    def GetAbsGrowth(self) -> double:
-        first = self.closeData[0]
-        last = self.closeData[self.closeData.size - 1]
+    def get_abs_growth(self) -> double:
+        first = self.close_data[0]
+        last = self.close_data[self.close_data.size - 1]
         return (last - first) / last * 100
 
-    def GetGrowthOnMean(self) -> double:
-        last = self.closeData[self.closeData.size - 1]
-        return (last - self.closeMean) / last * 100
+    def get_growth_on_mean(self) -> double:
+        last = self.close_data[self.close_data.size - 1]
+        return (last - self.close_mean) / last * 100
 
-    def AddRollingAverage(self) -> void:
-        self.data['MA5'] = self.closeData.rolling(window=5).mean()
-        self.data['MA10'] = self.closeData.rolling(window=5).mean()
+    def add_rolling_average(self) -> void:
+        self.data['MA5'] = self.close_data.rolling(window=5).mean()
+        self.data['MA10'] = self.close_data.rolling(window=5).mean()
 
-    def GetVolatility(self) -> double:
-        points = self.closeData
+    def get_volatility(self) -> double:
+        points = self.close_data
         vol = 0
         for point in points:
-            vol += (point - self.closeMean)**2
-        vol = vol / self.closeData.size / self.closeMean
+            vol += (point - self.close_mean)**2
+        vol = vol / self.close_data.size / self.close_mean
         return vol

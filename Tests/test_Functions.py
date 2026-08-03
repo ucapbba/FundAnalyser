@@ -9,10 +9,10 @@ import Globals.Variables as gv
 def GetFundWithDataHelper():
     startDate = '2023-11-01'
     endDate = '2023-12-01'
-    fund = Fund(ISIN="GB00B5N99561", fullName="Artemis Global Income Fund Inc")
-    helper = BaseDataHelper("/Data/Yahoo/TestData/", fund.fullName + "_" + startDate + "_" + endDate + ".csv")
-    helper.LoadCSVtoDF()
-    fund.setDataHelper(helper)
+    fund = Fund(isin="GB00B5N99561", full_name="Artemis Global Income Fund Inc")
+    helper = BaseDataHelper("/Data/Yahoo/TestData/", fund.full_name + "_" + startDate + "_" + endDate + ".csv")
+    helper.load_csv_to_df()
+    fund.set_data_helper(helper)
     return fund
 
 
@@ -28,7 +28,7 @@ def test_GetAllFundIndicators_populatesIndicatorsForFundWithData():
     fund = GetFundWithDataHelper()
     fundList = {"Artemis": fund}
 
-    funcs.GetAllFundIndicators(fundList)
+    funcs.get_all_fund_indicators(fundList)
 
     assert fund.indicators[gv.MEAN] == pytest.approx(111.70, rel=1e-2)
     assert fund.indicators[gv.ABS_GROWTH] == pytest.approx(2.674, rel=1e-2)
@@ -38,10 +38,10 @@ def test_GetAllFundIndicators_populatesIndicatorsForFundWithData():
 
 
 def test_GetAllFundIndicators_skipsFundWithoutDataHelper():
-    fund = Fund(ISIN="GB00000000", fullName="No Data Fund")
+    fund = Fund(isin="GB00000000", full_name="No Data Fund")
     fundList = {"NoData": fund}
 
-    funcs.GetAllFundIndicators(fundList)
+    funcs.get_all_fund_indicators(fundList)
 
     assert fund.indicators == {}
 
@@ -49,9 +49,9 @@ def test_GetAllFundIndicators_skipsFundWithoutDataHelper():
 def test_getData_fromYahoo_returnsDownloadedData(monkeypatch):
     expected = MakePriceFrame([1.0, 2.0])
     monkeypatch.setattr(funcs.yf, "download", lambda isin, startDate, endDate: expected)
-    fund = Fund(ISIN="GB00000000", fullName="Some Fund")
+    fund = Fund(isin="GB00000000", full_name="Some Fund")
 
-    data = funcs.getData(fund, '2023-01-01', '2023-02-01')
+    data = funcs.get_data(fund, '2023-01-01', '2023-02-01')
 
     assert data is expected
 
@@ -61,9 +61,9 @@ def test_getData_fromYahoo_swallowsExceptionAndReturnsNone(monkeypatch):
         raise ValueError("Yahoo unavailable")
 
     monkeypatch.setattr(funcs.yf, "download", raiseError)
-    fund = Fund(ISIN="GB00000000", fullName="Some Fund")
+    fund = Fund(isin="GB00000000", full_name="Some Fund")
 
-    data = funcs.getData(fund, '2023-01-01', '2023-02-01')
+    data = funcs.get_data(fund, '2023-01-01', '2023-02-01')
 
     assert data is None
 
@@ -74,39 +74,39 @@ def test_getData_fromCSV_usesBaseDataHelper(monkeypatch):
             self.path = path
             self.filename = filename
 
-        def LoadCSVtoDF(self):
-            self.myDataFrame = pd.DataFrame({'Close': [1.0, 2.0]})
+        def load_csv_to_df(self):
+            self.data_frame = pd.DataFrame({'Close': [1.0, 2.0]})
 
-        def GetDataFrame(self):
-            return self.myDataFrame
+        def get_data_frame(self):
+            return self.data_frame
 
     monkeypatch.setattr(funcs, "BaseDataHelper", FakeDataHelper)
-    fund = Fund(ISIN="GB00000000", fullName="Some Fund")
+    fund = Fund(isin="GB00000000", full_name="Some Fund")
 
-    data = funcs.getData(fund, '2023-01-01', '2023-02-01', fromYahoo=False)
+    data = funcs.get_data(fund, '2023-01-01', '2023-02-01', from_yahoo=False)
 
     assert list(data['Close']) == [1.0, 2.0]
 
 
 def test_PopulateAllFundData_setsDataHelperWhenDataReturned(monkeypatch):
-    monkeypatch.setattr(funcs, "getData", lambda fund, startDate, endDate: MakePriceFrame([1.0, 2.0, 3.0]))
-    fund = Fund(ISIN="GB00000000", fullName="Some Fund")
+    monkeypatch.setattr(funcs, "get_data", lambda fund, startDate, endDate: MakePriceFrame([1.0, 2.0, 3.0]))
+    fund = Fund(isin="GB00000000", full_name="Some Fund")
     fundList = {"SomeFund": fund}
 
-    funcs.PopulateAllFundData('2023-01-02', '2023-01-05', fundList)
+    funcs.populate_all_fund_data('2023-01-02', '2023-01-05', fundList)
 
-    assert fund.dataHelper is not None
-    assert list(fund.dataHelper.GetDataFrame()['Close']) == [1.0, 2.0, 3.0]
+    assert fund.data_helper is not None
+    assert list(fund.data_helper.get_data_frame()['Close']) == [1.0, 2.0, 3.0]
 
 
 def test_PopulateAllFundData_skipsFundWhenDataIsEmpty(monkeypatch):
-    monkeypatch.setattr(funcs, "getData", lambda fund, startDate, endDate: MakePriceFrame([]))
-    fund = Fund(ISIN="GB00000000", fullName="Some Fund")
+    monkeypatch.setattr(funcs, "get_data", lambda fund, startDate, endDate: MakePriceFrame([]))
+    fund = Fund(isin="GB00000000", full_name="Some Fund")
     fundList = {"SomeFund": fund}
 
-    funcs.PopulateAllFundData('2023-01-02', '2023-01-05', fundList)
+    funcs.populate_all_fund_data('2023-01-02', '2023-01-05', fundList)
 
-    assert fund.dataHelper is None
+    assert fund.data_helper is None
 
 
 def test_PlotAllFundData_onlyPlotsFundsWithDataHelper(monkeypatch):
@@ -116,14 +116,14 @@ def test_PlotAllFundData_onlyPlotsFundsWithDataHelper(monkeypatch):
         def __init__(self, dataHelper):
             self.dataHelper = dataHelper
 
-        def PlotSNS(self, x, y, title):
+        def plot_sns(self, x, y, title):
             calls.append((x, y, title))
 
     monkeypatch.setattr(funcs, "MarketDtaPlotter", FakePlotter)
     fundWithData = GetFundWithDataHelper()
-    fundWithoutData = Fund(ISIN="GB00000000", fullName="No Data Fund")
+    fundWithoutData = Fund(isin="GB00000000", full_name="No Data Fund")
     fundList = {"HasData": fundWithData, "NoData": fundWithoutData}
 
-    funcs.PlotAllFundData(fundList)
+    funcs.plot_all_fund_data(fundList)
 
-    assert calls == [("Date", "Close", fundWithData.fullName)]
+    assert calls == [("Date", "Close", fundWithData.full_name)]

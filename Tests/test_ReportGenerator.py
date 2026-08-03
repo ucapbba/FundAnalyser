@@ -42,17 +42,17 @@ class FakeBook:
 
 
 def MakeFund(fullName, **indicators):
-    fund = Fund(ISIN="GB00000000", fullName=fullName)
+    fund = Fund(isin="GB00000000", full_name=fullName)
     fund.indicators = indicators
     return fund
 
 
 def test_CreateWarningsSheet_flagsFundWithNoIndicators():
-    fund = Fund(ISIN="GB00000000", fullName="No Indicators Fund")
+    fund = Fund(isin="GB00000000", full_name="No Indicators Fund")
     reportGenerator = FundReportGenerator({"NoIndicators": fund})
     book = FakeBook()
 
-    reportGenerator.CreateWarningsSheet(book)
+    reportGenerator.create_warnings_sheet(book)
 
     sheet = book.sheets["Warnings"]
     assert sheet.cells[(1, 0)] == "NoIndicators"
@@ -71,7 +71,7 @@ def test_CreateWarningsSheet_flagsLowGrowthHighVolatilityAndHighAllotment():
     reportGenerator = FundReportGenerator({"Risky": fund})
     book = FakeBook()
 
-    reportGenerator.CreateWarningsSheet(book)
+    reportGenerator.create_warnings_sheet(book)
 
     messages = [value for (row, col), value in book.sheets["Warnings"].cells.items() if col == 1 and row != 0]
     assert "abs growth is below 10%" in messages
@@ -91,7 +91,7 @@ def test_CreateWarningsSheet_flagsLowAllotment():
     reportGenerator = FundReportGenerator({"Small": fund})
     book = FakeBook()
 
-    reportGenerator.CreateWarningsSheet(book)
+    reportGenerator.create_warnings_sheet(book)
 
     messages = [value for (row, col), value in book.sheets["Warnings"].cells.items() if col == 1 and row != 0]
     assert messages == ["Low allotment in fund"]
@@ -109,7 +109,7 @@ def test_CreateWarningsSheet_noWarningsForHealthyFund():
     reportGenerator = FundReportGenerator({"Healthy": fund})
     book = FakeBook()
 
-    reportGenerator.CreateWarningsSheet(book)
+    reportGenerator.create_warnings_sheet(book)
 
     dataRows = [row for row, _ in book.sheets["Warnings"].cells if row != 0]
     assert dataRows == []
@@ -120,7 +120,7 @@ def test_CreateIndicatorsSheet_writesHeaderAndFundRow():
     reportGenerator = FundReportGenerator({"SomeFund": fund})
     book = FakeBook()
 
-    reportGenerator.CreateIndicatorsSheet(book)
+    reportGenerator.create_indicators_sheet(book)
 
     sheet = book.sheets["Indicators"]
     assert sheet.cells[(0, 0)] == "Fund"
