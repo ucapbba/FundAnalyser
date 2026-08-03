@@ -1,4 +1,3 @@
-import string
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.colors import LogNorm
@@ -8,11 +7,11 @@ import matplotlib
 
 class BasePlotter():
     """Generic base plotting functions"""
-    def __init__(self, _helper: BaseDataHelper):
-        self.helper = _helper
+    def __init__(self, helper: BaseDataHelper):
+        self.helper = helper
 
-    def plotScatter(self, col1: string, col2: string, title="", fontsize=10, pointsize=1):
-        df = self.helper.GetDataFrame()
+    def plot_scatter(self, col1: str, col2: str, title="", fontsize=10, pointsize=1):
+        df = self.helper.get_data_frame()
         Xarray = np.asarray(df[col1])
         Yarray = np.asarray(df[col2])
         fig, ax = plt.subplots()
@@ -24,8 +23,8 @@ class BasePlotter():
         ax.scatter(Xarray, Yarray, s=pointsize)
         plt.show()
 
-    def plot2Scatter(self, col1: string, col2: string, col3: string, col4: string, title="", fontsize=15):
-        df = self.helper.GetDataFrame()
+    def plot_two_scatter(self, col1: str, col2: str, col3: str, col4: str, title="", fontsize=15):
+        df = self.helper.get_data_frame()
         Xarray = np.asarray(df[col1])
         Yarray = np.asarray(df[col2])
         X2array = np.asarray(df[col3])
@@ -41,7 +40,7 @@ class BasePlotter():
         ax2.set_xlabel(col3, fontsize=fontsize)
         plt.show()
 
-    def PlotColourMesh(self, title=""):
+    def plot_colour_mesh(self, title=""):
         font = {'family': 'serif',
                 'weight': 'normal',
                 'size': 10}
@@ -52,7 +51,7 @@ class BasePlotter():
         ZRESI = self.helper.ZRESI
         _min = self.helper.min
         _max = self.helper.max
-        ax.pcolormesh(XRESI, YRESI, ZRESI, norm=LogNorm(vmin=_min, vmax=_max),\
+        ax.pcolormesh(XRESI, YRESI, ZRESI, norm=LogNorm(vmin=_min, vmax=_max),
                       rasterized=True, shading='gouraud')
         ax.set(title=title)
         plt.axis('off')

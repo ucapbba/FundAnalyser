@@ -1,4 +1,3 @@
-import string
 from numpy import ndarray, void, loadtxt
 from pandas import DataFrame
 import os
@@ -8,42 +7,42 @@ import pandas as pd
 
 class BaseDataHelper:
     """For importing and manipulating file data"""
-    myDataFrame: DataFrame
-    myArray: ndarray
+    data_frame: DataFrame
+    array: ndarray
 
-    def __init__(self, _path: string, _fname: string, _myDataFrame: DataFrame = None):
-        self.path = _path
-        self.filename = _fname
-        self.myDataFrame = _myDataFrame
-    
-    def CreateDataFrame(self):
-        df = DataFrame(self.myArray)
-        self.myDataFrame = df
+    def __init__(self, path: str, fname: str, data_frame: DataFrame | None = None):
+        self.path = path
+        self.filename = fname
+        self.data_frame = data_frame
 
-    def GetDataFrame(self):
-        return self.myDataFrame
+    def create_data_frame(self):
+        df = DataFrame(self.array)
+        self.data_frame = df
 
-    def GetFilePath(self) -> string:
+    def get_data_frame(self):
+        return self.data_frame
+
+    def get_file_path(self) -> str:
         return self.path + self.filename
 
-    def LoadToArray(self) -> void:
+    def load_to_array(self) -> void:
         cwd = os.getcwd()
-        filePath = self.GetFilePath()
-        self.myArray = loadtxt(cwd + filePath)
-        
-    def LoadCSVtoDF(self):
-        cwd = os.getcwd()
-        filePath = self.GetFilePath()
-        self.myDataFrame = pd.read_csv(cwd + filePath)
+        file_path = self.get_file_path()
+        self.array = loadtxt(cwd + file_path)
 
-    def SaveDataFrame(self) -> void:
+    def load_csv_to_df(self):
         cwd = os.getcwd()
-        filePath = self.GetFilePath()
-        self.myDataFrame.to_csv(cwd + filePath)
-        
-    def TruncateArray(self, size: int) -> void:
-        newArray = self.myArray[:size]
-        self.myArray = newArray
+        file_path = self.get_file_path()
+        self.data_frame = pd.read_csv(cwd + file_path)
 
-    def GetArray(self) -> ndarray:
-        return self.myArray
+    def save_data_frame(self) -> void:
+        cwd = os.getcwd()
+        file_path = self.get_file_path()
+        self.data_frame.to_csv(cwd + file_path)
+
+    def truncate_array(self, size: int) -> void:
+        new_array = self.array[:size]
+        self.array = new_array
+
+    def get_array(self) -> ndarray:
+        return self.array
