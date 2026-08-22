@@ -1,5 +1,6 @@
 import numpy as np
 from pandas import DataFrame
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from MarketData.FundDataAnalyser import FundAnalyser
 from MarketData.FundList import FundList
 from MarketData.FundList import Fund
@@ -9,21 +10,36 @@ from Base.BaseDataHelper import BaseDataHelper
 import yfinance as yf
 
 
-def populate_all_fund_data(start_date, end_date, fund_list: FundList) -> np.void:
-    for fund_key, fund in fund_list.items():
-        print("Processing key " + fund_key)
-        data = get_data(fund, start_date, end_date)
-        data = data.reset_index()
-        # yfinance returns MultiIndex columns (Price, Ticker); flatten so 'Date'/'Close' are plain columns
-        data.columns = data.columns.get_level_values(0)
-        data_helper = MarketDataHelper(data, start_date, end_date)
-        if data_helper.is_empty():
-            print("Problem accessing Yahoo data for " + fund_key)
-            print("")
-            continue
-        data_helper.has_full_dates_range()
-        fund.set_data_helper(data_helper)
-        print(" ")
+def _fetch_fund_data(fund_key, fund, start_date, end_date):
+    data = get_data(fund, start_date, end_date)
+    data = data.reset_index()
+    # yfinance returns MultiIndex columns (Price, Ticker); flatten so 'Date'/'Close' are plain columns
+    data.columns = data.columns.get_level_values(0)
+    return fund_key, fund, data
+
+
+def populate_all_fund_data(start_date, end_date, fund_list: FundList, max_workers: int = 8) -> np.void:
+    with ThreadPoolExecutor(max_workers=max_workers) as executor:
+        futures = {}
+        for fund_key, fund in fund_list.items():
+            print(f"Submitted: {fund_key}")
+            futures[executor.submit(_fetch_fund_data, fund_key, fund, start_date, end_date)] = fund_key
+
+        for future in as_completed(futures):
+            fund_key = futures[future]
+            try:
+                fund_key, fund, data = future.result()
+            except BaseException as e:
+                print(f"[{fund_key}] FAILED: {e}")
+                continue
+
+            data_helper = MarketDataHelper(data, start_date, end_date)
+            if data_helper.is_empty():
+                print(f"[{fund_key}] FAILED: empty data from Yahoo")
+                continue
+            data_helper.has_full_dates_range()
+            fund.set_data_helper(data_helper)
+            print(f"[{fund_key}] OK")
 
 
 def plot_all_fund_data(fund_list: FundList) -> np.void:
@@ -53,7 +69,7 @@ def get_all_fund_indicators(fund_list: FundList) -> FundList:
 def get_data(fund: Fund, start_date, end_date, from_yahoo=True) -> DataFrame:
     if from_yahoo is True:
         try:
-            data = yf.download(fund.isin, start_date, end_date)
+            data = yf.download(fund.isin, start_date, end_date, progress=False)
             return data
         except BaseException:
             print("Problem accessing Yahoo data for " + fund.full_name)
