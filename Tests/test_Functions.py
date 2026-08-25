@@ -48,7 +48,7 @@ def test_GetAllFundIndicators_skipsFundWithoutDataHelper():
 
 def test_getData_fromYahoo_returnsDownloadedData(monkeypatch):
     expected = MakePriceFrame([1.0, 2.0])
-    monkeypatch.setattr(funcs.yf, "download", lambda isin, startDate, endDate: expected)
+    monkeypatch.setattr(funcs.yf, "download", lambda *args, **kwargs: expected)
     fund = Fund(isin="GB00000000", full_name="Some Fund")
 
     data = funcs.get_data(fund, '2023-01-01', '2023-02-01')
@@ -57,7 +57,7 @@ def test_getData_fromYahoo_returnsDownloadedData(monkeypatch):
 
 
 def test_getData_fromYahoo_swallowsExceptionAndReturnsNone(monkeypatch):
-    def raiseError(isin, startDate, endDate):
+    def raiseError(*args, **kwargs):
         raise ValueError("Yahoo unavailable")
 
     monkeypatch.setattr(funcs.yf, "download", raiseError)

@@ -11,6 +11,7 @@ GROWTH_MEAN = "Growth On Mean"
 VOL = "Volatility"
 UNITS = "Units"
 AVE_VALUE = "Average Value"
+MARKET_CAP = "Market Cap"
 
 # Warnings
 MIN_GROWTH = -10
