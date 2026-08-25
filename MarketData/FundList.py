@@ -1,9 +1,37 @@
 from collections import UserDict
-
 from MarketData.Fund import Fund
 
 
-class FundList(UserDict):
+class BaseFundList(UserDict):
+    def get_fund(self, fund_key: str) -> Fund:
+        return self[fund_key]
+
+
+class QuantumCompanyList(BaseFundList):
+    def __init__(self):
+        super().__init__()
+        self["IonQ"] = Fund(isin="US46222L1089", full_name="IonQ")
+        # Trapped-ion quantum computers. Generally regarded as one of the strongest pure-play quantum companies commercially.
+        self["Rigetti"] = Fund(isin="US76655K1034", full_name="Rigetti Computing")
+        # Superconducting-qubit quantum computers.
+        self["D-Wave"] = Fund(isin="US26740W1099", full_name="D-Wave Quantum")
+        # Quantum annealing systems, plus gate-model quantum efforts.
+        self["Quantum"] = Fund(isin="US74766W1080", full_name="Quantum Computing Inc")
+        # Smaller company focused on quantum hardware, software, and photonics. Often grouped with the others as one of the major public US quantum stocks
+
+
+class QuantumAdjacentCompanyList(BaseFundList):
+    """Large diversified tech companies with significant quantum computing efforts, not pure-play quantum stocks."""
+    def __init__(self):
+        super().__init__()
+        self["IBM"] = Fund(isin="US4592001014", full_name="IBM")
+        #self["Alphabet"] = Fund(isin="US02079K3059", full_name="Alphabet (Google) Class A")
+        self["Microsoft"] = Fund(isin="US5949181045", full_name="Microsoft")
+        self["Intel"] = Fund(isin="US4581401001", full_name="Intel")
+        self["NVIDIA"] = Fund(isin="US67066G1040", full_name="NVIDIA")
+
+
+class FundList(BaseFundList):
     def __init__(self):
         super().__init__()
         self["7IM"] = Fund(isin="GB00B1LBG003", full_name="7IM Sustainable Balance Fund C Inc")
@@ -50,6 +78,3 @@ class FundList(UserDict):
         self["UBS S&P 500"] = Fund(isin="GB00BMN91T34", full_name="UBS S&P 500 Index Fund")
         self["Van U.S Equity"] = Fund(isin="GB00B5B74S01", full_name="Vanguard U.S. Equity Index Fund")
         self["Van Gilt"] = Fund(isin="GB00B4M89245", full_name="Vanguard U.K. Long Duration Gilt Index Fund")
-
-    def get_fund(self, fund_key: str) -> Fund:
-        return self[fund_key]

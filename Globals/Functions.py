@@ -15,7 +15,8 @@ def _fetch_fund_data(fund_key, fund, start_date, end_date):
     data = data.reset_index()
     # yfinance returns MultiIndex columns (Price, Ticker); flatten so 'Date'/'Close' are plain columns
     data.columns = data.columns.get_level_values(0)
-    return fund_key, fund, data
+    market_cap = get_market_cap(fund)
+    return fund_key, fund, data, market_cap
 
 
 def populate_all_fund_data(start_date, end_date, fund_list: FundList, max_workers: int = 8) -> np.void:
@@ -28,11 +29,12 @@ def populate_all_fund_data(start_date, end_date, fund_list: FundList, max_worker
         for future in as_completed(futures):
             fund_key = futures[future]
             try:
-                fund_key, fund, data = future.result()
+                fund_key, fund, data, market_cap = future.result()
             except BaseException as e:
                 print(f"[{fund_key}] FAILED: {e}")
                 continue
 
+            fund.set_market_cap(market_cap)
             data_helper = MarketDataHelper(data, start_date, end_date)
             if data_helper.is_empty():
                 print(f"[{fund_key}] FAILED: empty data from Yahoo")
@@ -77,3 +79,11 @@ def get_data(fund: Fund, start_date, end_date, from_yahoo=True) -> DataFrame:
         helper = BaseDataHelper("/Data/Yahoo/", fund.full_name + "_" + start_date + "_" + end_date + ".csv")
         helper.load_csv_to_df()
         return helper.get_data_frame()
+
+
+def get_market_cap(fund: Fund):
+    # mutual funds have no market cap; yfinance returns None for those tickers rather than raising
+    try:
+        return yf.Ticker(fund.isin).fast_info.get("marketCap")
+    except BaseException:
+        return None
