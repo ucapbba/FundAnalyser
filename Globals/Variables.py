@@ -13,6 +13,13 @@ UNITS = "Units"
 AVE_VALUE = "Average Value"
 MARKET_CAP = "Market Cap"
 
+# Period changes (%)
+CHANGE_DAY = "Day"
+CHANGE_WEEK = "Week"
+CHANGE_MONTH = "Month"
+CHANGE_YEAR = "Year"
+CHANGE_5YEAR = "5 Years"
+
 # Warnings
 MIN_GROWTH = -10
 MAX_VOL = 10

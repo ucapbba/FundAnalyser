@@ -78,3 +78,52 @@ class FundList(BaseFundList):
         self["UBS S&P 500"] = Fund(isin="GB00BMN91T34", full_name="UBS S&P 500 Index Fund")
         self["Van U.S Equity"] = Fund(isin="GB00B5B74S01", full_name="Vanguard U.S. Equity Index Fund")
         self["Van Gilt"] = Fund(isin="GB00B4M89245", full_name="Vanguard U.K. Long Duration Gilt Index Fund")
+
+
+# The lists below use Yahoo symbols rather than ISINs in the isin field; Yahoo accepts either.
+
+class IndexList(BaseFundList):
+    """Major stock market indices."""
+    def __init__(self):
+        super().__init__()
+        self["FTSE 100"] = Fund(isin="^FTSE", full_name="FTSE 100")
+        self["FTSE 250"] = Fund(isin="^FTMC", full_name="FTSE 250")
+        self["S&P 500"] = Fund(isin="^GSPC", full_name="S&P 500")
+        self["Dow Jones"] = Fund(isin="^DJI", full_name="Dow Jones Industrial Average")
+        self["Nasdaq"] = Fund(isin="^IXIC", full_name="Nasdaq Composite")
+        self["Euro Stoxx 50"] = Fund(isin="^STOXX50E", full_name="Euro Stoxx 50")
+        self["DAX"] = Fund(isin="^GDAXI", full_name="DAX")
+        self["CAC 40"] = Fund(isin="^FCHI", full_name="CAC 40")
+        self["Nikkei 225"] = Fund(isin="^N225", full_name="Nikkei 225")
+        self["Hang Seng"] = Fund(isin="^HSI", full_name="Hang Seng")
+
+
+class BondList(BaseFundList):
+    """Government bonds, tracked through ETFs: their price moves the opposite way to yields."""
+    def __init__(self):
+        super().__init__()
+        self["UK Gilts"] = Fund(isin="IGLT.L", full_name="UK Gilts (iShares Core UK Gilts)")
+        self["UK Gilts 0-5yr"] = Fund(isin="IGLS.L", full_name="UK Gilts 0-5yr (iShares)")
+        self["UK Index-Linked Gilts"] = Fund(isin="INXG.L", full_name="UK Index-Linked Gilts (iShares)")
+        self["US Treasury 1-3yr"] = Fund(isin="SHY", full_name="US Treasury 1-3yr (iShares SHY)")
+        self["US Treasury 7-10yr"] = Fund(isin="IEF", full_name="US Treasury 7-10yr (iShares IEF)")
+        self["US Treasury 20+yr"] = Fund(isin="TLT", full_name="US Treasury 20+yr (iShares TLT)")
+        self["US TIPS"] = Fund(isin="TIP", full_name="US Inflation-Linked Treasuries (iShares TIP)")
+        self["German Bunds"] = Fund(isin="IS0L.DE", full_name="German Bunds (iShares Germany Govt Bond)")
+        self["German Bunds 10yr+"] = Fund(isin="EXX6.DE", full_name="German Bunds 10.5yr+ (iShares eb.rexx)")
+
+
+class CommodityList(BaseFundList):
+    """Commodities, as front-month futures prices (these jump slightly when contracts roll over)."""
+    def __init__(self):
+        super().__init__()
+        self["Gold"] = Fund(isin="GC=F", full_name="Gold")
+        self["Silver"] = Fund(isin="SI=F", full_name="Silver")
+        self["Platinum"] = Fund(isin="PL=F", full_name="Platinum")
+        self["Copper"] = Fund(isin="HG=F", full_name="Copper")
+        self["Brent Crude"] = Fund(isin="BZ=F", full_name="Brent Crude Oil")
+        self["WTI Crude"] = Fund(isin="CL=F", full_name="WTI Crude Oil")
+        self["Natural Gas"] = Fund(isin="NG=F", full_name="Natural Gas (US)")
+        self["Wheat"] = Fund(isin="ZW=F", full_name="Wheat")
+        self["Corn"] = Fund(isin="ZC=F", full_name="Corn")
+        self["Coffee"] = Fund(isin="KC=F", full_name="Coffee")
